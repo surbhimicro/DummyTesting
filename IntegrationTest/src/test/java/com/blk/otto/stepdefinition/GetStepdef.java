@@ -11,70 +11,107 @@ import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 import io.restassured.response.ResponseOptions;
 
-
 public class GetStepdef {
-	
-	public static ResponseOptions<Response> response;
-	private String url ;
-	private String s;
+
+	private static ResponseOptions<Response> response;
+	private String url;
+	private String val;
 	Utility ulty;
- 
-	
-	/** Call before each scenario
-	 * Utility Class Declaration  
+
+	/**
+	 * Call before each scenario Utility Class Declaration
 	 */
 	@Before
 	public void setup() {
-		
-		 ulty=new Utility();
+
+		ulty = new Utility();
 		System.out.println("Before");
 	}
-	
 
 	// Call after each scenario
-	  
+
 	@After
 	public void cleanup() {
 		System.out.println("After");
 	}
 
-	
-	/**Getting api url from ConstantConfig class
+	/**
+	 * Getting api url from config.properties and ConstantConfig class
+	 * 
 	 * @throws Throwable
 	 */
 	@Given("^want to perform get operation$")
-	public void perform_get_operation_for() throws Throwable 
-	{
-		url= ConstantConfig.getapiurl;  
-		
+	public void perform_get_operation_for() throws Throwable {
+		url = ulty.getUrl() + ConstantConfig.suffixgetapiurl;
 	}
-	
-	/** Calling getop method from Utility class
-	 * Capturing response in "response" variable
-	 * Validating the content of body
+
+	/**
+	 * Calling getop method from Utility class Capturing response in "response"
+	 * variable
+	 * 
 	 * @throws Throwable
 	 */
 	@When("^execute get api$")
 	public void execute_get_api() throws Throwable {
-		
+
 		response = Utility.performGetCall(url);
-		
+
 	}
 
-	/**Passing the id from feature file
+	/**
+	 * Passing the id from feature file
+	 * 
 	 * @param id
-	 * @throws Throwable
-	 * Validating the expected and actual result
+	 * @throws Throwable Validating the expected and actual result
 	 */
 	@Then("^should see the circuitId \"([^\"]*)\"$")
 	public void should_see_the_circuitId(String id) throws Throwable {
-		s = response.getBody().jsonPath().get("data.id").toString();
-		
-		Assert.assertTrue(s.contains(id));
-		
-		int code =response.getStatusCode();
-		
-		System.out.println("Status Code   "  + code);
+		val = response.getBody().jsonPath().get("data.id").toString();
+
+		Assert.assertTrue(val.contains(id));
+
+		int code = response.getStatusCode();
+
+		System.out.println("Status Code   " + code);
+	}
+
+	/**
+	 * Performing for Negative Scenario
+	 * 
+	 * @throws Throwable
+	 */
+	@Given("^perform get operation$")
+	public void perform_get_operation() throws Throwable {
+		url = ulty.getUrl() + ConstantConfig.sufinvalidapiurl;
+	}
+
+	/**
+	 * Calling getop method from Utility class Capturing response in "response"
+	 * variable
+	 * 
+	 * @throws Throwable
+	 */
+	@When("^execute get api with invalid data$")
+	public void execute_get_api_with_invalid_data() throws Throwable {
+
+		response = Utility.performGetCall(url);
+
+	}
+
+	/**
+	 * Validating for Negative scenario
+	 * 
+	 * @throws Throwable Validating the expected and actual result
+	 */
+	@Then("^should be invalid status$")
+	public void should_be_invalid_status() throws Throwable {
+		val = response.getBody().jsonPath().get("error").toString();
+
+		System.out.println("Error is   " + val);
+		int code = response.getStatusCode();
+
+		Assert.assertNotSame(val, code);
+		System.out.println("Status Code  " + code);
 	}
 
 }

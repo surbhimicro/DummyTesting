@@ -3,8 +3,9 @@ package com.blk.otto.utilities;
 
 public class ConstantConfig {
 	
-	// Constant variable for get api
-	public static final String getapiurl ="https://pensionplanazure.azurewebsites.net/plan/getAllPlans";
-			
-			
+	// Constant variable
+	public static final String suffixgetapiurl ="plan/getAllPlans";
+	public static final String sufinvalidapiurl ="plan/getAllPlans/users";		
+	public static final String blankapiurl ="/";
+	public static final String suffixpostapiurl ="api/users/";
 }

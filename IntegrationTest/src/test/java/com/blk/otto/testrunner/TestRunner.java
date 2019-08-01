@@ -6,17 +6,17 @@ import io.cucumber.junit.Cucumber;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-features = "src/test/resources/com/blk/otto/Features/Get.feature"
+features = "src/test/resources/com/blk/otto/Features/Post.feature"
 ,glue= {"classpath:com.blk.otto.stepdefinition"}
 ,plugin=  {"pretty"},
 monochrome= true,
-//dryRun  = true,
-tags = {"@DummyTC01,@Positive"}
+tags = {"@DummyTC03,@Positive"}
 
 )
 
 public class TestRunner {
 	
+
 
 }
 
