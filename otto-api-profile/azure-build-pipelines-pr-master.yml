@@ -6,10 +6,10 @@ pool:
 
 steps:
 - task: Maven@3
-  displayName: 'Maven otto-api-profile/pom.xml'
+  displayName: 'PR build for user profile service'
   inputs:
     testRunTitle: CItests
-    mavenPomFile: 'pom.xml'
+    mavenPomFile: 'otto-api-profile/pom.xml'
     mavenOptions: '-Xmx1024m'
     javaHomeOption: 'JDKVersion'
     codeCoverageToolOption: JaCoCo
@@ -28,4 +28,4 @@ steps:
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: drop'
   inputs:
-    PathtoPublish: '$(build.artifactstagingdirectory)'
+    PathtoPublish: '$(build.artifactstagingdirectory)' 
