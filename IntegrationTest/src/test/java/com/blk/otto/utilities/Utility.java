@@ -7,6 +7,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Map;
 import java.util.Properties;
+
+import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -142,5 +144,36 @@ public class Utility {
 		return request.delete(baseURL);
 
 	}
+	
+	/**
+     * @return post url from config.properties file
+     * @throws IOException
+     */
+     public String putUrl() throws IOException {
+           readConfigProperty();
+           url = prop.getProperty("putapiurl");
+           if (url != null) {
+                  return url;
+           } else
+                  throw new RuntimeException("url not specified in property file");
+     }
+     
+     /**
+     * performing for put call
+     * 
+      * @param baseURL
+     * @param body
+     * @param header
+     * @return
+     */
+     public ResponseOptions<Response> performPutCall(String baseURL, String body, Map<String, String> header) {
+           
+           RestAssured.baseURI=prop.getProperty("putapiurl");
+
+           return (RestAssured.given()
+                         .body(body)
+                         .put(ConstantConfig.suffixputapiurl));
+     }
+
 
 }

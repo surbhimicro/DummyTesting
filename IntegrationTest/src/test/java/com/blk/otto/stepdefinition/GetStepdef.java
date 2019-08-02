@@ -16,25 +16,18 @@ public class GetStepdef {
 	private static ResponseOptions<Response> response;
 	private String url;
 	private String val;
-	Utility ulty;
+	Utility ulty = new Utility();
 
-	/**
-	 * Call before each scenario Utility Class Declaration
-	 */
+	private static boolean beforeSuit = true;
+
 	@Before
-	public void setup() {
-
-		ulty = new Utility();
-		System.out.println("Before");
+	public void beforeAll() {
+		if (beforeSuit) {
+			
+			System.out.println("Before");
+			beforeSuit =false;
+			}
 	}
-
-	// Call after each scenario
-
-	@After
-	public void cleanup() {
-		System.out.println("After");
-	}
-
 	/**
 	 * Getting api url from config.properties and ConstantConfig class
 	 * 

@@ -49,7 +49,7 @@ public class PostStepDef {
 
 		header.put("Content-Type", "application/json");
 		// header.put("Authorization", props.getproperty("key"));
-		response = Utility.performPostCall(URL, body, header);
+		response = ulty.performPostCall(URL, body, header);
 
 		System.out.println("Body.....  " + ((ResponseBodyData) response).asString());
 

@@ -14,7 +14,7 @@ import io.restassured.response.ResponseOptions;
 
 public class DeleteStepDef {
 	
-	Utility ulty = new Utility();
+    Utility ulty;
 	private static ResponseOptions<Response> response;
 	private String URL;
 	
