@@ -6,11 +6,11 @@ import io.cucumber.junit.Cucumber;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-features = "src/test/resources/com/blk/otto/Features/Post.feature"
+features = "src/test/resources/com/blk/otto/Features/Delete.feature"
 ,glue= {"classpath:com.blk.otto.stepdefinition"}
 ,plugin=  {"pretty"},
 monochrome= true,
-tags = {"@DummyTC03,@Positive"}
+tags = {"@DummyTC04"}
 
 )
 

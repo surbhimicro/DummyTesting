@@ -116,7 +116,7 @@ public class Utility {
 	}
 
 	/**
-	 * performing for put call
+	 * performing for post call
 	 * 
 	 * @param baseURL
 	 * @param body
@@ -127,6 +127,19 @@ public class Utility {
 		request.body(body);
 		request.headers(header);
 		return request.post(baseURL);
+
+	}
+	
+	/**
+	 * performing for delete call
+	 * 
+	 * @param baseURL
+	 * @return
+	 */
+	public static ResponseOptions<Response> performDeleteCall(String baseURL) {
+		//request.body(body);
+		//request.headers(header);
+		return request.delete(baseURL);
 
 	}
 

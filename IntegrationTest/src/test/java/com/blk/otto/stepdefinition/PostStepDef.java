@@ -27,13 +27,13 @@ public class PostStepDef {
 	 * 
 	 * @throws Throwable
 	 */
-	@Given("^perform put operation$")
-	public void perform_put_operation() throws Throwable {
+	@Given("^perform post operation$")
+	public void perform_post_operation() throws Throwable {
 		URL = ulty.postUrl() + ConstantConfig.suffixpostapiurl;
 	}
 
 	/**
-	 * Calling put call method from Utility class Capturing response in "response"
+	 * Calling post call method from Utility class Capturing response in "response"
 	 * variable
 	 * 
 	 * @throws Throwable
@@ -73,4 +73,6 @@ public class PostStepDef {
 
 	}
 
+	
+	
 }
