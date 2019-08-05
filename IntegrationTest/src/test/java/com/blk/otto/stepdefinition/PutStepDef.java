@@ -5,10 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import org.json.JSONObject;
 import org.junit.Assert;
-
-import com.blk.otto.utilities.ConstantConfig;
 import com.blk.otto.utilities.Utility;
-
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -17,9 +14,16 @@ import io.restassured.response.ResponseBodyData;
 import io.restassured.response.ResponseOptions;
 
 public class PutStepDef {
-	Utility ulty = new Utility();
+	
 	private static ResponseOptions<Response> response;
 	private String URL;
+	
+	Hooks hook;
+	
+	public PutStepDef()
+	{
+		this.hook =new Hooks();
+	}
 
 	/**
 	 * Getting api url from config.properties and ConstantConfig class
@@ -28,7 +32,8 @@ public class PutStepDef {
 	 */
 	@Given("^I want to perform PUT operation$")
 	public void perform_put_url_check() throws Throwable {
-		URL = ulty.putUrl() + ConstantConfig.suffixputapiurl;
+		//URL = hook.putUrl() + ConstantConfig.suffixputapiurl;
+		URL = hook.getBaseUrl("putapiurl");
 	}
 
 	/**
@@ -46,7 +51,7 @@ public class PutStepDef {
 		String body = json.toString();
 		Map<String, String> header = new HashMap<String, String>();
 		header.put("Content-Type", "application/json");
-		response=ulty.performPutCall(URL, body, header);
+		response=Utility.performPutCall(URL, body, header);
 		System.out.println("<< Response Body=" + ((ResponseBodyData) response).asString()+" >>");		
 	}
 

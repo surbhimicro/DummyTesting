@@ -14,9 +14,15 @@ import io.restassured.response.ResponseOptions;
 
 public class DeleteStepDef {
 	
-    Utility ulty;
+ 
 	private static ResponseOptions<Response> response;
 	private String URL;
+	Hooks hook;
+	
+	public DeleteStepDef()
+	{
+		this.hook =new Hooks();
+	}
 	
 	/**
 	 * Getting api url from config.properties and ConstantConfig class
@@ -25,7 +31,7 @@ public class DeleteStepDef {
 	 */
 	@Given("^perform delete operation$")
 	public void perform_delete_operation() throws Throwable {
-		URL = ulty.postUrl() + ConstantConfig.suffixpostapiurl;
+		URL = hook.getBaseUrl("postapiurl") + ConstantConfig.suffixpostapiurl;
 	}
 
 	/**

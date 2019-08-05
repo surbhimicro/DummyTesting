@@ -8,7 +8,7 @@ Scenario: Validate get API with given url
 
 Given want to perform get operation
 When execute get api
-Then should see the circuitId "1" 
+Then should see the circuitId "albert_park" 
 
 #Performing the negative scenario for get call
 

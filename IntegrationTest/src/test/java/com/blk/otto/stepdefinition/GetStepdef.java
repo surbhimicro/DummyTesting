@@ -3,8 +3,6 @@ package com.blk.otto.stepdefinition;
 import org.junit.Assert;
 import com.blk.otto.utilities.ConstantConfig;
 import com.blk.otto.utilities.Utility;
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -16,17 +14,11 @@ public class GetStepdef {
 	private static ResponseOptions<Response> response;
 	private String url;
 	private String val;
-	Utility ulty = new Utility();
+	Hooks hook;
 
-	private static boolean beforeSuit = true;
-
-	@Before
-	public void beforeAll() {
-		if (beforeSuit) {
-			
-			System.out.println("Before");
-			beforeSuit =false;
-			}
+	public GetStepdef()
+	{
+		this.hook =new Hooks();
 	}
 	/**
 	 * Getting api url from config.properties and ConstantConfig class
@@ -35,7 +27,7 @@ public class GetStepdef {
 	 */
 	@Given("^want to perform get operation$")
 	public void perform_get_operation_for() throws Throwable {
-		url = ulty.getUrl() + ConstantConfig.suffixgetapiurl;
+		url = hook.getBaseUrl("getapiurl") + ConstantConfig.suffixgetapiurl;
 	}
 
 	/**
@@ -59,7 +51,7 @@ public class GetStepdef {
 	 */
 	@Then("^should see the circuitId \"([^\"]*)\"$")
 	public void should_see_the_circuitId(String id) throws Throwable {
-		val = response.getBody().jsonPath().get("data.id").toString();
+		val = response.getBody().jsonPath().get("MRData.CircuitTable.Circuits.circuitId").toString();
 
 		Assert.assertTrue(val.contains(id));
 
@@ -75,7 +67,7 @@ public class GetStepdef {
 	 */
 	@Given("^perform get operation$")
 	public void perform_get_operation() throws Throwable {
-		url = ulty.getUrl() + ConstantConfig.sufinvalidapiurl;
+		url = hook.getBaseUrl("getapiurl") + ConstantConfig.sufinvalidapiurl;
 	}
 
 	/**

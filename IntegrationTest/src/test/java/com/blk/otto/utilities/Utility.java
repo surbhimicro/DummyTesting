@@ -1,12 +1,9 @@
 package com.blk.otto.utilities;
 
 import static io.restassured.RestAssured.given;
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Map;
-import java.util.Properties;
 
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
@@ -23,9 +20,8 @@ public class Utility {
 	ValidatableResponse json;
 	public static RequestSpecBuilder rsb = new RequestSpecBuilder();
 	public static String bodyasString;
-	public static InputStream inpStream = null;
-	public static Properties prop = new Properties();
-	private String url;
+	
+	
 
 	/**
 	 * Constructor Initialization done for Rest assured
@@ -36,52 +32,7 @@ public class Utility {
 
 	}
 
-	/**
-	 * parsing the config.properties file
-	 * 
-	 * @throws IOException
-	 */
-	public void readConfigProperty() throws IOException {
-		try {
-			inpStream = getClass().getClassLoader()
-					.getResourceAsStream("com//blk//otto//TestData//Config//config.properties");
-			if (inpStream != null)
-				prop.load(inpStream);
-			else
-				throw new RuntimeException("Config file cannot found");
-		} catch (IOException e) {
-			System.out.println("Configuration properties file cannot be found");
-		}
-	}
-
-	/**
-	 * get url from config.properties file
-	 * 
-	 * @return
-	 * @throws IOException
-	 */
-	public String getUrl() throws IOException {
-		readConfigProperty();
-		url = prop.getProperty("getapiurl");
-		if (url != null) {
-			return url;
-		} else
-			throw new RuntimeException("url not specified in property file");
-	}
-
-	/**
-	 * @return post url from config.properties file
-	 * @throws IOException
-	 */
-	public String postUrl() throws IOException {
-		readConfigProperty();
-		url = prop.getProperty("postapiurl");
-		if (url != null) {
-			return url;
-		} else
-			throw new RuntimeException("url not specified in property file");
-	}
-
+	
 	/**
 	 * performing get call with url
 	 * 
@@ -139,25 +90,11 @@ public class Utility {
 	 * @return
 	 */
 	public static ResponseOptions<Response> performDeleteCall(String baseURL) {
-		//request.body(body);
-		//request.headers(header);
+		
 		return request.delete(baseURL);
 
 	}
 	
-	/**
-     * @return post url from config.properties file
-     * @throws IOException
-     */
-     public String putUrl() throws IOException {
-           readConfigProperty();
-           url = prop.getProperty("putapiurl");
-           if (url != null) {
-                  return url;
-           } else
-                  throw new RuntimeException("url not specified in property file");
-     }
-     
      /**
      * performing for put call
      * 
@@ -166,11 +103,10 @@ public class Utility {
      * @param header
      * @return
      */
-     public ResponseOptions<Response> performPutCall(String baseURL, String body, Map<String, String> header) {
+     public static ResponseOptions<Response> performPutCall(String baseURL, String body, Map<String, String> header) {
            
-           RestAssured.baseURI=prop.getProperty("putapiurl");
-
-           return (RestAssured.given()
+          RestAssured.baseURI=baseURL;
+    	  return (RestAssured.given()
                          .body(body)
                          .put(ConstantConfig.suffixputapiurl));
      }

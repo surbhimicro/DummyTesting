@@ -2,13 +2,10 @@ package com.blk.otto.stepdefinition;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import org.json.JSONObject;
 import org.junit.Assert;
-
 import com.blk.otto.utilities.ConstantConfig;
 import com.blk.otto.utilities.Utility;
-
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -17,10 +14,18 @@ import io.restassured.response.ResponseBodyData;
 import io.restassured.response.ResponseOptions;
 
 public class PostStepDef {
-	Utility ulty = new Utility();
+	
 	private static ResponseOptions<Response> response;
 	private String URL;
 	private String val;
+	Hooks hook;
+	
+	public PostStepDef()
+	{
+		this.hook =new Hooks();
+	}
+	
+
 
 	/**
 	 * Getting api url from config.properties and ConstantConfig class
@@ -29,7 +34,7 @@ public class PostStepDef {
 	 */
 	@Given("^perform post operation$")
 	public void perform_post_operation() throws Throwable {
-		URL = ulty.postUrl() + ConstantConfig.suffixpostapiurl;
+		URL = hook.getBaseUrl("postapiurl") + ConstantConfig.suffixpostapiurl;
 	}
 
 	/**
@@ -49,7 +54,7 @@ public class PostStepDef {
 
 		header.put("Content-Type", "application/json");
 		// header.put("Authorization", props.getproperty("key"));
-		response = ulty.performPostCall(URL, body, header);
+		response = Utility.performPostCall(URL, body, header);
 
 		System.out.println("Body.....  " + ((ResponseBodyData) response).asString());
 

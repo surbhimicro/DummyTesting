@@ -8,11 +8,11 @@ import io.cucumber.junit.Cucumber;
 @RunWith(Cucumber.class)
 @CucumberOptions(
 		//features= {"classpath:Post.feature"}
-features = {"src/test/resources/com/blk/otto/Features/Put.feature"} //, "src/test/resources/com/blk/otto/Features/Get.feature"}
+features = {"src/test/resources/com/blk/otto/Features/Post.feature"} //, "src/test/resources/com/blk/otto/Features/Get.feature"}
 ,glue= {"classpath:com.blk.otto.stepdefinition"}
 ,plugin=  {"pretty"},
 monochrome= true,
-tags = {"@DummyPUTTC05"}
+tags = {"@DummyTC03"}
 
 )
 
