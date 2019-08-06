@@ -90,12 +90,12 @@ public class GetStepdef {
 	 */
 	@Then("^should be invalid status$")
 	public void should_be_invalid_status() throws Throwable {
-		val = response.getBody().jsonPath().get("error").toString();
+		//val = response.getBody().jsonPath().get("error").toString();
 
-		System.out.println("Error is   " + val);
+		//System.out.println("Error is   " + val);
 		int code = response.getStatusCode();
 
-		Assert.assertNotSame(val, code);
+		Assert.assertEquals(404, code);
 		System.out.println("Status Code  " + code);
 	}
 
