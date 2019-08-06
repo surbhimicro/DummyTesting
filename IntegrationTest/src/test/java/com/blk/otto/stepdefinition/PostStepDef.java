@@ -2,13 +2,10 @@ package com.blk.otto.stepdefinition;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import org.json.JSONObject;
 import org.junit.Assert;
-
 import com.blk.otto.utilities.ConstantConfig;
 import com.blk.otto.utilities.Utility;
-
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -17,23 +14,31 @@ import io.restassured.response.ResponseBodyData;
 import io.restassured.response.ResponseOptions;
 
 public class PostStepDef {
-	Utility ulty = new Utility();
+	
 	private static ResponseOptions<Response> response;
 	private String URL;
 	private String val;
+	Hooks hook;
+	
+	public PostStepDef()
+	{
+		this.hook =new Hooks();
+	}
+	
+
 
 	/**
 	 * Getting api url from config.properties and ConstantConfig class
 	 * 
 	 * @throws Throwable
 	 */
-	@Given("^perform put operation$")
-	public void perform_put_operation() throws Throwable {
-		URL = ulty.postUrl() + ConstantConfig.suffixpostapiurl;
+	@Given("^perform post operation$")
+	public void perform_post_operation() throws Throwable {
+		URL = hook.getBaseUrl("postapiurl") + ConstantConfig.suffixpostapiurl;
 	}
 
 	/**
-	 * Calling put call method from Utility class Capturing response in "response"
+	 * Calling post call method from Utility class Capturing response in "response"
 	 * variable
 	 * 
 	 * @throws Throwable
@@ -73,4 +78,6 @@ public class PostStepDef {
 
 	}
 
+	
+	
 }
