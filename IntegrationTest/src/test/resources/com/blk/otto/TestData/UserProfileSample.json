@@ -1,0 +1,18 @@
+{
+  "azureB2CId": "534da8b5-2941-4df0-8d04-0b5ac5f4e42c",
+  "appuserId": "adcffef9-02f3-4472-88b2-ea8943ca5c2b",
+  "participantId": 123456789,
+  "employmentStatus": "A",
+  "employmentStatusEffectiveDate": 20100101,
+  "emailAddress": "jane.public@example.com",
+  "retirementAge": 65,
+  "salary": 55000,
+  "annualBonusAmount": 10000,
+  "jointLife": true,
+  "cola": true,
+  "socialSecurity": true,
+  "maritalStatus": "M",
+  "participantDOB": 19750404,
+  "spouseDOB": 19760406,
+  "alternateEmail": "john.smith@example.com"
+}
