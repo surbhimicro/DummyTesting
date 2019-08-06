@@ -45,7 +45,7 @@ public class Utility {
 	 * @param url
 	 * @return
 	 */
-	public static ResponseOptions<Response> performGetCall(String url) {
+	public ResponseOptions<Response> performGetCall(String url) {
 		
 		return RestAssured.given().get(url);
 
@@ -58,7 +58,7 @@ public class Utility {
 	 * @param headers
 	 * @return
 	 */
-	public static ResponseOptions<Response> performGetCall(String url, Map<String, String> headers) {
+	public ResponseOptions<Response> performGetCall(String url, Map<String, String> headers) {
 		
 		try {
 			return request.get(new URI(url));
@@ -77,7 +77,7 @@ public class Utility {
 	 * @param header
 	 * @return
 	 */
-	public static ResponseOptions<Response> performPostCall(String baseURL, String body, Map<String, String> header) {
+	public ResponseOptions<Response> performPostCall(String baseURL, String body, Map<String, String> header) {
 		request.body(body);
 		request.headers(header);
 		return request.post(baseURL);
@@ -90,7 +90,7 @@ public class Utility {
 	 * @param baseURL
 	 * @return
 	 */
-	public static ResponseOptions<Response> performDeleteCall(String baseURL) {
+	public ResponseOptions<Response> performDeleteCall(String baseURL) {
 
 		return request.delete(baseURL);
 
@@ -104,7 +104,7 @@ public class Utility {
 	 * @param header
 	 * @return ResponseOptions<Response>
 	 */
-	public static ResponseOptions<Response> performPutCall(String baseURL, String body, Map<String, String> header) {
+	public ResponseOptions<Response> performPutCall(String baseURL, String body, Map<String, String> header) {
 
 		RestAssured.baseURI = baseURL;
 		return (RestAssured.given().body(body).put(ConstantConfig.suffixputapiurl));

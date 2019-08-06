@@ -18,10 +18,12 @@ public class DeleteStepDef {
 	private static ResponseOptions<Response> response;
 	private String URL;
 	Hooks hook;
+	Utility utility;
 	
 	public DeleteStepDef()
 	{
 		this.hook =new Hooks();
+		utility = hook.getUtilityObject();
 	}
 	
 	/**
@@ -31,7 +33,7 @@ public class DeleteStepDef {
 	 */
 	@Given("^perform delete operation$")
 	public void perform_delete_operation() throws Throwable {
-		URL = hook.getBaseUrl("postapiurl") + ConstantConfig.suffixpostapiurl;
+		URL = hook.getPropertyValue("postapiurl") + ConstantConfig.suffixpostapiurl;
 	}
 
 	/**
@@ -43,7 +45,7 @@ public class DeleteStepDef {
 	@When("^execute the delete api$")
 	public void execute_the_delete_api() throws Throwable {
 
-		response = Utility.performDeleteCall(URL);
+		response = utility.performDeleteCall(URL);
 		System.out.println("No response Body.....  " + ((ResponseBodyData) response).asString());
 
 	}

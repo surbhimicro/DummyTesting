@@ -17,12 +17,13 @@ public class PutStepDef {
 	
 	private static ResponseOptions<Response> response;
 	private String URL;
-	
 	Hooks hook;
+	Utility utility;
 	
 	public PutStepDef()
 	{
 		this.hook =new Hooks();
+		utility = hook.getUtilityObject();
 	}
 
 	/**
@@ -33,7 +34,7 @@ public class PutStepDef {
 	@Given("^I want to perform PUT operation$")
 	public void perform_put_url_check() throws Throwable {
 		//URL = hook.putUrl() + ConstantConfig.suffixputapiurl;
-		URL = hook.getBaseUrl("putapiurl");
+		URL = hook.getPropertyValue("putapiurl");
 	}
 
 	/**
@@ -51,7 +52,7 @@ public class PutStepDef {
 		String body = json.toString();
 		Map<String, String> header = new HashMap<String, String>();
 		header.put("Content-Type", "application/json");
-		response=Utility.performPutCall(URL, body, header);
+		response=utility.performPutCall(URL, body, header);
 		System.out.println("<< Response Body=" + ((ResponseBodyData) response).asString()+" >>");		
 	}
 

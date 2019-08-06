@@ -8,12 +8,15 @@ import com.blk.otto.utilities.Utility;
 
 import io.cucumber.java.Before;
 
+/**
+ * @author chbakliw
+ *
+ */
 public class Hooks {
 
 	public static InputStream inpStream = null;
-	public static Properties prop = new Properties();
-	private String url;
-	private Utility ulty;
+	private Utility utility;
+	private Properties prop;
 
 	private static boolean beforeSuit = true;
 
@@ -24,21 +27,23 @@ public class Hooks {
 			readConfigProperty();
 			System.out.println("BeforeAll....");
 			beforeSuit = false;
+			prop = new Properties();
+			utility = new Utility();
 		}
 	}
 
-	public Hooks() {
-		ulty = new Utility();
-	}
-
-	public Utility getUtility() {
-		
-		return ulty;
+	/**
+	 * return already created object of Utility class.
+	 * @return Utility
+	 */
+	public Utility getUtilityObject() {
+		if (utility == null)
+			utility = new Utility();
+		return utility;
 	}
 
 	/**
-	 * parsing the config.properties file
-	 * 
+	 * reads config property file
 	 * @throws IOException
 	 */
 	public void readConfigProperty() throws IOException {
@@ -55,18 +60,18 @@ public class Hooks {
 
 	}
 
-	
-	/**
-	 * @return url from config.properties file
+	/** Return value for corresponding property.
+	 * @param property
+	 * @return String
 	 * @throws IOException
 	 */
-	public String getBaseUrl(String key) throws IOException {
+	public String getPropertyValue(String property) throws IOException {
 
-		url = prop.getProperty(key);
-		if (url != null) {
-			return url;
+		String value = prop.getProperty(property);
+		if (value != null) {
+			return value;
 		} else
-			throw new RuntimeException("url not specified in property file");
+			throw new RuntimeException(property + " not specified in property file");
 	}
 
 }

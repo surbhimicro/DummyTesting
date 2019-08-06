@@ -15,10 +15,12 @@ public class GetStepdef {
 	private String url;
 	private String val;
 	Hooks hook;
+	Utility utility;
 
 	public GetStepdef()
 	{
 		this.hook =new Hooks();
+		utility = hook.getUtilityObject();
 	}
 	/**
 	 * Getting api url from config.properties and ConstantConfig class
@@ -27,7 +29,7 @@ public class GetStepdef {
 	 */
 	@Given("^want to perform get operation$")
 	public void perform_get_operation_for() throws Throwable {
-		url = hook.getBaseUrl("getapiurl") + ConstantConfig.suffixgetapiurl;
+		url = hook.getPropertyValue("getapiurl") + ConstantConfig.suffixgetapiurl;
 	}
 
 	/**
@@ -39,7 +41,7 @@ public class GetStepdef {
 	@When("^execute get api$")
 	public void execute_get_api() throws Throwable {
 
-		response = Utility.performGetCall(url);
+		response = utility.performGetCall(url);
 
 	}
 
@@ -67,7 +69,7 @@ public class GetStepdef {
 	 */
 	@Given("^perform get operation$")
 	public void perform_get_operation() throws Throwable {
-		url = hook.getBaseUrl("getapiurl") + ConstantConfig.sufinvalidapiurl;
+		url = hook.getPropertyValue("getapiurl") + ConstantConfig.sufinvalidapiurl;
 	}
 
 	/**
@@ -79,7 +81,7 @@ public class GetStepdef {
 	@When("^execute get api with invalid data$")
 	public void execute_get_api_with_invalid_data() throws Throwable {
 
-		response = Utility.performGetCall(url);
+		response = utility.performGetCall(url);
 
 	}
 

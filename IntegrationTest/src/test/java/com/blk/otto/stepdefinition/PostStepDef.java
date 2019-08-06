@@ -19,10 +19,12 @@ public class PostStepDef {
 	private String URL;
 	private String val;
 	Hooks hook;
+	Utility utility;
 	
 	public PostStepDef()
 	{
 		this.hook =new Hooks();
+		utility = hook.getUtilityObject();
 	}
 	
 
@@ -34,7 +36,7 @@ public class PostStepDef {
 	 */
 	@Given("^perform post operation$")
 	public void perform_post_operation() throws Throwable {
-		URL = hook.getBaseUrl("postapiurl") + ConstantConfig.suffixpostapiurl;
+		URL = hook.getPropertyValue("postapiurl") + ConstantConfig.suffixpostapiurl;
 	}
 
 	/**
@@ -54,7 +56,7 @@ public class PostStepDef {
 
 		header.put("Content-Type", "application/json");
 		// header.put("Authorization", props.getproperty("key"));
-		response = Utility.performPostCall(URL, body, header);
+		response = utility.performPostCall(URL, body, header);
 
 		System.out.println("Body.....  " + ((ResponseBodyData) response).asString());
 
