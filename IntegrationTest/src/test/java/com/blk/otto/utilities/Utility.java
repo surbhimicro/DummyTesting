@@ -40,13 +40,8 @@ public class Utility {
 	 * @return
 	 */
 	public static ResponseOptions<Response> performGetCall(String url) {
-		try {
-			return request.get(new URI(url));
-		} catch (URISyntaxException e) {
-
-			e.printStackTrace();
-		}
-		return null;
+		
+		return RestAssured.given().get(url);
 
 	}
 
@@ -58,6 +53,7 @@ public class Utility {
 	 * @return
 	 */
 	public static ResponseOptions<Response> performGetCall(String url, Map<String, String> headers) {
+		
 		try {
 			return request.get(new URI(url));
 		} catch (URISyntaxException e) {
@@ -65,7 +61,6 @@ public class Utility {
 			e.printStackTrace();
 		}
 		return null;
-
 	}
 
 	/**
