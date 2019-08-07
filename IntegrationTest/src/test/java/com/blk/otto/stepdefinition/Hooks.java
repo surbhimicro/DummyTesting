@@ -16,7 +16,8 @@ public class Hooks {
 
 	public static InputStream inpStream = null;
 	private Utility utility;
-	private Properties prop;
+	public static Properties prop= new Properties();
+	
 
 	private static boolean beforeSuit = true;
 
@@ -27,10 +28,10 @@ public class Hooks {
 			readConfigProperty();
 			System.out.println("BeforeAll....");
 			beforeSuit = false;
-			prop = new Properties();
 			utility = new Utility();
 		}
 	}
+	
 
 	/**
 	 * return already created object of Utility class.
