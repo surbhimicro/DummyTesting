@@ -1,3 +1,4 @@
+[![Build Status](https://dev.azure.com/surmitta/POCTesting/_apis/build/status/POCTesting-Maven-CI?branchName=features/Dummy_IT)](https://dev.azure.com/surmitta/POCTesting/_build/latest?definitionId=1&branchName=features/Dummy_IT)
 # Introduction 
 TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
 
